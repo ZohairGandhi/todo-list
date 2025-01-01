@@ -1,6 +1,16 @@
 export default class Project {
-  constructor(title, taskList) {
+  constructor(title) {
     this.title = title;
-    this.taskList = taskList;
+    this.taskList = [];
+  }
+
+  addTask(task) {
+    this.taskList.push(task);
+  }
+
+  removeTask(taskTitle) {
+    this.taskList.splice(
+      this.taskList.findIndex((item) => item.title === taskTitle)
+    );
   }
 }
