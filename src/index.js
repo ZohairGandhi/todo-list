@@ -1,6 +1,2 @@
-import "./style.css";
-
-const body = document.querySelector("body");
-const testHead = document.createElement("h1");
-testHead.textContent = "Test";
-body.appendChild(testHead);
+import Task from "./Task.js";
+import Project from "./Project.js";
