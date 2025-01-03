@@ -15,14 +15,4 @@ export default class Project {
       this.taskList.findIndex((task) => task.title === taskTitle)
     );
   }
-
-  filterToday() {
-    return this.taskList.filter((task) => isToday(task.dueDate));
-  }
-
-  filterThisWeek() {
-    return this.taskList.filter(
-      (task) => differenceInDays(task.dueDate, new Date()) <= 7
-    );
-  }
 }
