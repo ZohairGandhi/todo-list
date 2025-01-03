@@ -1,6 +1,6 @@
 import Project from "./Project";
 
-class App {
+export default class App {
   constructor() {
     this.projectList = [];
     this.projectList.push(new Project("Default"));
@@ -17,7 +17,7 @@ class App {
   }
 
   filterByDueDate(dueDate) {
-    todayTasks = [];
+    const todayTasks = [];
 
     for (const proj of this.projectList) {
       for (const task of proj.taskList) {
@@ -37,7 +37,7 @@ class App {
   }
 
   filterCompleted() {
-    compTasks = [];
+    const compTasks = [];
 
     for (const proj of this.projectList) {
       for (const task of proj.taskList) {
