@@ -1,3 +1,6 @@
+import { differenceInDays, isToday } from "date-fns";
+import { da } from "date-fns/locale";
+
 export default class Task {
   constructor(
     title,
@@ -11,5 +14,13 @@ export default class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.isCompleted = isCompleted;
+  }
+
+  isDueToday() {
+    return isToday(this.dueDate);
+  }
+
+  isDueThisWeek() {
+    return differenceInDays(this.dueDate, new Date()) <= 7;
   }
 }
