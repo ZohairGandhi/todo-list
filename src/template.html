@@ -4,6 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+  <body>
+    <div id="app-layout">
+      <div class="flex-list" id="proj-list">
+        <div class="flex-list" id="filter-sec">
+          <div class="list-item">
+            <img src="./icons/calendar-today-outline.svg" alt="" />
+            <p>Today</p>
+          </div>
+
+          <div class="list-item">
+            <img src="./icons/calendar-week-outline.svg" alt="" />
+            <p>This Week</p>
+          </div>
+
+          <div class="list-item">
+            <img src="./icons/check-circle-outline.svg" alt="" />
+            <p>Completed</p>
+          </div>
+        </div>
+
+        <hr class="sep" />
+
+        <div class="flex-list" id="proj-sec">
+          <p class="proj-sec-title">Projects</p>
+
+          <div class="list-item">
+            <img src="./icons/list-box-outline.svg" alt="" />
+            <p>Home</p>
+          </div>
+
+          <div class="list-item">
+            <img src="./icons/list-box-outline.svg" alt="" />
+            <p>Work</p>
+          </div>
+
+          <div class="list-item">
+            <img src="./icons/list-box-outline.svg" alt="" />
+            <p>Groceries</p>
+          </div>
+
+          <div class="list-item">
+            <img src="./icons/list-box-outline.svg" alt="" />
+            <p>Miscellaneous</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="task-list">
+        <h1 id="task-list-head" class="head">Project Name</h1>
+
+        <button id="add-task-btn">+ Add task</button>
+
+        <div id="task-items" class="flex-list">
+          <label class="container"
+            >Item 1
+            <input type="checkbox" checked="checked" />
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container"
+            >Item 2
+            <input type="checkbox" checked="checked" />
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container"
+            >Item 3
+            <input type="checkbox" checked="checked" />
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="container"
+            >Item 4
+            <input type="checkbox" checked="checked" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="task-desc">
+        <div id="date-priority-sec">
+          <p>Sat, 11 Jan</p>
+          <img src="./icons/flag.svg" alt="" />
+        </div>
+
+        <h1 id="task-desc-head" class="head">Item 1</h1>
+
+        <p id="task-desc-txt">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+          ullam ipsam alias maiores quo! In inventore exercitationem nobis! Sunt
+          vel mollitia libero excepturi veritatis, molestias ipsum quos sint
+          alias eaque.
+        </p>
+
+        <button id="edit-btn">Edit</button>
+      </div>
+    </div>
+  </body>
 </html>
