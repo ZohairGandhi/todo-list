@@ -1,4 +1,5 @@
 import Project from "./Project";
+import Storage from "./Storage";
 
 export default class App {
   constructor() {
@@ -8,12 +9,32 @@ export default class App {
 
   addProject(proj) {
     this.projectList.push(proj);
+    Storage.saveData(this);
   }
 
   removeProject(projTitle) {
     this.projectList.splice(
       this.projectList.findIndex((proj) => proj.title === projTitle)
     );
+    Storage.saveData(this);
+  }
+
+  getProject(projTitle) {
+    return this.projectList.find((proj) => proj.title === projTitle);
+  }
+
+  addTaskToProj(projTitle, task) {
+    this.getProject(projTitle).addTask(task);
+    Storage.saveData(this);
+  }
+
+  removeTaskFromProj(projTitle, taskTitle) {
+    this.getProject(projTitle).removeTask(taskTitle);
+    Storage.saveData(this);
+  }
+
+  getTaskFromProj(projTitle, taskTitle) {
+    return this.getProject(projTitle).getTask(taskTitle);
   }
 
   filterByDueDate(dueDate) {
