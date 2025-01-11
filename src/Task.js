@@ -1,5 +1,4 @@
 import { differenceInDays, isToday } from "date-fns";
-import { da } from "date-fns/locale";
 
 export default class Task {
   constructor(
