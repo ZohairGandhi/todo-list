@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +34,10 @@
         <hr class="sep" />
 
         <div class="flex-list" id="proj-sec">
-          <p class="proj-sec-title">Projects</p>
+          <div id="proj-sec-title-container">
+            <p id="proj-sec-title">Projects</p>
+            <button id="add-proj-btn">+</button>
+          </div>
 
           <div class="list-item">
             <img src="./icons/list-box-outline.svg" alt="" />
@@ -88,6 +91,8 @@
             <span class="checkmark"></span>
           </label>
         </div>
+
+        <button id="del-proj-btn">Delete Project</button>
       </div>
 
       <div id="task-desc">
@@ -105,7 +110,10 @@
           alias eaque.
         </p>
 
-        <button id="edit-btn">Edit</button>
+        <div id="task-btns-container">
+          <button id="edit-task-btn">Edit</button>
+          <button id="del-task-btn">Delete</button>
+        </div>
       </div>
     </div>
   </body>
