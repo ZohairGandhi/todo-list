@@ -14,7 +14,7 @@ export default class App {
 
   removeProject(projTitle) {
     this.projectList.splice(
-      this.projectList.findIndex((proj) => proj.title === projTitle)
+      this.projectList.findIndex((proj) => proj.title === projTitle),
     );
     Storage.saveData(this);
   }
@@ -40,8 +40,8 @@ export default class App {
   filterByDueDate(dueDate) {
     const todayTasks = [];
 
-    for (const proj of this.projectList) {
-      for (const task of proj.taskList) {
+    this.projectList.forEach((proj) => {
+      proj.taskList.forEach((task) => {
         if (dueDate === "today") {
           if (task.isDueToday()) {
             todayTasks.push(task);
@@ -51,8 +51,8 @@ export default class App {
             todayTasks.push(task);
           }
         }
-      }
-    }
+      });
+    });
 
     return todayTasks;
   }
@@ -60,13 +60,13 @@ export default class App {
   filterCompleted() {
     const compTasks = [];
 
-    for (const proj of this.projectList) {
-      for (const task of proj.taskList) {
+    this.projectList.forEach((proj) => {
+      proj.taskList.forEach((task) => {
         if (task.isCompleted) {
           compTasks.push(task);
         }
-      }
-    }
+      });
+    });
 
     return compTasks;
   }
