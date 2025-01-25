@@ -15,17 +15,17 @@
     <div id="app-layout">
       <div class="flex-list" id="proj-list">
         <div class="flex-list" id="filter-sec">
-          <div class="list-item">
+          <div class="list-item" id="today-filter">
             <img src="./icons/calendar-today-outline.svg" alt="" />
             <p>Today</p>
           </div>
 
-          <div class="list-item">
+          <div class="list-item" id="week-filter">
             <img src="./icons/calendar-week-outline.svg" alt="" />
             <p>This Week</p>
           </div>
 
-          <div class="list-item">
+          <div class="list-item" id="comp-filter">
             <img src="./icons/check-circle-outline.svg" alt="" />
             <p>Completed</p>
           </div>
@@ -62,34 +62,30 @@
       </div>
 
       <div id="task-list">
-        <h1 id="task-list-head" class="head">Project Name</h1>
+        <h1 class="head">Project Name</h1>
 
         <button id="add-task-btn">+ Add task</button>
 
         <div id="task-items" class="flex-list">
-          <label class="container"
-            >Item 1
-            <input type="checkbox" checked="checked" />
-            <span class="checkmark"></span>
-          </label>
+          <div class="container">
+            <input type="checkbox" name="" id="" />
+            <label for="">Item 1</label>
+          </div>
 
-          <label class="container"
-            >Item 2
-            <input type="checkbox" checked="checked" />
-            <span class="checkmark"></span>
-          </label>
+          <div class="container">
+            <input type="checkbox" name="" id="" />
+            <label for="">Item 2</label>
+          </div>
 
-          <label class="container"
-            >Item 3
-            <input type="checkbox" checked="checked" />
-            <span class="checkmark"></span>
-          </label>
+          <div class="container">
+            <input type="checkbox" name="" id="" />
+            <label for="">Item 3</label>
+          </div>
 
-          <label class="container"
-            >Item 4
-            <input type="checkbox" checked="checked" />
-            <span class="checkmark"></span>
-          </label>
+          <div class="container">
+            <input type="checkbox" name="" id="" />
+            <label for="">Item 4</label>
+          </div>
         </div>
 
         <button id="del-proj-btn">Delete Project</button>
