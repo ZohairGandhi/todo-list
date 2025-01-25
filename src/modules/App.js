@@ -42,7 +42,7 @@ export default class App {
 
     this.projectList.forEach((proj) => {
       proj.taskList.forEach((task) => {
-        if (dueDate === "today") {
+        if (dueDate === "Today") {
           if (task.isDueToday()) {
             todayTasks.push(task);
           }
