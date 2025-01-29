@@ -1,10 +1,8 @@
-import Project from "./Project";
 import Storage from "./Storage";
 
 export default class App {
   constructor() {
     this.projectList = [];
-    this.projectList.push(new Project("Default"));
   }
 
   addProject(proj) {
