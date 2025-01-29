@@ -6,18 +6,16 @@ export default class UI {
     const weekFilt = document.querySelector("#week-filter");
     const compFilt = document.querySelector("#comp-filter");
 
-    todayFilt.addEventListener("click", () =>
-      this.renderTodayTasks(app, "Today"),
-    );
+    todayFilt.addEventListener("click", () => this.renderTasks(app, "Today"));
     weekFilt.addEventListener("click", () =>
-      this.renderTodayTasks(app, "This Week"),
+      this.renderTasks(app, "This Week"),
     );
     compFilt.addEventListener("click", () =>
-      this.renderTodayTasks(app, "Completed"),
+      this.renderTasks(app, "Completed"),
     );
   }
 
-  static renderTodayTasks(app, filterType) {
+  static renderTasks(app, filterType) {
     const taskList = document.querySelector("#task-list");
     const head = this.createHeading("h1", "head", filterType);
     const div = this.createDiv("flex-list", "task-items");
@@ -25,8 +23,10 @@ export default class UI {
     let tasks;
     if (filterType === "Completed") {
       tasks = app.filterCompleted();
-    } else {
+    } else if (filterType === "Today" || filterType === "This Week") {
       tasks = app.filterByDueDate(filterType);
+    } else {
+      tasks = app.getProject(filterType).taskList;
     }
 
     tasks.forEach((task) => {
@@ -35,7 +35,14 @@ export default class UI {
     });
 
     taskList.innerHTML = "";
-    taskList.append(head, div);
+
+    if (["Completed", "Today", "This Week"].includes(filterType)) {
+      taskList.append(head, div);
+    } else {
+      const addBtn = this.createBtn("add-task-btn", "+ Add Task");
+      const delBtn = this.createBtn("del-proj-btn", "Delete Project");
+      taskList.append(head, addBtn, div, delBtn);
+    }
   }
 
   static createHeading(headType, className, text) {
@@ -61,8 +68,18 @@ export default class UI {
 
     app.projectList.forEach((proj) => {
       const projItem = this.createProjItem(proj.title);
+      projItem.addEventListener("click", () =>
+        this.renderTasks(app, proj.title),
+      );
       projSec.appendChild(projItem);
     });
+  }
+
+  static createBtn(idName, text) {
+    const btn = document.createElement("button");
+    btn.setAttribute("id", idName);
+    btn.textContent = text;
+    return btn;
   }
 
   static createProjItem(projTitle) {
