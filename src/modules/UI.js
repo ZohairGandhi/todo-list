@@ -15,6 +15,18 @@ export default class UI {
     );
   }
 
+  static renderProjSec(app) {
+    const projSec = document.querySelector("#proj-sec");
+
+    app.projectList.forEach((proj) => {
+      const projItem = this.createProjItem(proj.title);
+      projItem.addEventListener("click", () =>
+        this.renderTasks(app, proj.title),
+      );
+      projSec.appendChild(projItem);
+    });
+  }
+
   static renderTasks(app, filterType) {
     const taskList = document.querySelector("#task-list");
     const head = this.createHeading("h1", "head", filterType);
@@ -61,18 +73,6 @@ export default class UI {
     lbl.textContent = taskTitle;
     div.append(chBox, lbl);
     return div;
-  }
-
-  static renderProjSec(app) {
-    const projSec = document.querySelector("#proj-sec");
-
-    app.projectList.forEach((proj) => {
-      const projItem = this.createProjItem(proj.title);
-      projItem.addEventListener("click", () =>
-        this.renderTasks(app, proj.title),
-      );
-      projSec.appendChild(projItem);
-    });
   }
 
   static createBtn(idName, text) {
