@@ -57,10 +57,13 @@ export default class UI {
     }
   }
 
-  static createHeading(headType, className, text) {
+  static createHeading(headType, className, text, idName = null) {
     const head = document.createElement(headType);
     head.classList.add(className);
     head.textContent = text;
+    if (idName) {
+      head.setAttribute("id", idName);
+    }
     return head;
   }
 
@@ -110,9 +113,12 @@ export default class UI {
     return img;
   }
 
-  static createPara(text) {
+  static createPara(text, idName = null) {
     const para = document.createElement("p");
     para.textContent = text;
+    if (idName) {
+      para.setAttribute("id", idName);
+    }
     return para;
   }
 }
