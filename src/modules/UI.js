@@ -1,4 +1,5 @@
 import listBox from "../icons/list-box-outline.svg";
+import flag from "../icons/flag.svg";
 
 export default class UI {
   static setUpFilterSec(app) {
@@ -43,6 +44,9 @@ export default class UI {
 
     tasks.forEach((task) => {
       const taskItem = this.createTaskItem(task.title, task.isCompleted);
+
+      taskItem.addEventListener("click", () => this.renderTaskDesc(task));
+
       div.appendChild(taskItem);
     });
 
@@ -55,6 +59,31 @@ export default class UI {
       const delBtn = this.createBtn("del-proj-btn", "Delete Project");
       taskList.append(head, addBtn, div, delBtn);
     }
+  }
+
+  static renderTaskDesc(task) {
+    const taskDescSec = document.querySelector("#task-desc");
+
+    const datePriorSec = this.createDiv(null, "date-priority-sec");
+    const date = this.createPara(task.getFormattedDate());
+    const img = this.createImg(flag);
+    datePriorSec.append(date, img);
+
+    const taskTitle = this.createHeading(
+      "h1",
+      "head",
+      task.title,
+      "task-desc-head",
+    );
+    const taskDesc = this.createPara(task.desc, "task-desc-txt");
+
+    const btnContainer = this.createDiv(null, "task-btns-container");
+    const editBtn = this.createBtn("edit-task-btn", "Edit");
+    const delBtn = this.createBtn("del-task-btn", "Delete");
+    btnContainer.append(editBtn, delBtn);
+
+    taskDescSec.innerHTML = "";
+    taskDescSec.append(datePriorSec, taskTitle, taskDesc, btnContainer);
   }
 
   static createHeading(headType, className, text, idName = null) {
