@@ -18,12 +18,20 @@ export default class UI {
 
   static renderProjSec(app) {
     const projSec = document.querySelector("#proj-sec");
+    const titleContainer = this.createDiv(null, "proj-sec-title-container");
+    const title = this.createPara("Projects", "proj-sec-title");
+    const btn = this.createBtn("add-proj-btn", "+");
+
+    projSec.innerHTML = "";
+    titleContainer.append(title, btn);
+    projSec.appendChild(titleContainer);
 
     app.projectList.forEach((proj) => {
       const projItem = this.createProjItem(proj.title);
-      projItem.addEventListener("click", () =>
-        this.renderTasks(app, proj.title),
-      );
+      projItem.addEventListener("click", () => {
+        this.renderTasks(app, proj.title);
+        document.querySelector("#task-desc").innerHTML = "";
+      });
       projSec.appendChild(projItem);
     });
   }
