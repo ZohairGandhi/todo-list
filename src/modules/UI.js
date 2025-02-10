@@ -65,6 +65,14 @@ export default class UI {
     } else {
       const addBtn = this.createBtn("add-task-btn", "+ Add Task");
       const delBtn = this.createBtn("del-proj-btn", "Delete Project");
+
+      delBtn.addEventListener("click", () => {
+        app.removeProject(filterType);
+        this.renderProjSec(app);
+        taskList.innerHTML = "";
+        document.querySelector("#task-desc").innerHTML = "";
+      });
+
       taskList.append(head, addBtn, div, delBtn);
     }
   }
