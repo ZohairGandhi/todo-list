@@ -7,13 +7,18 @@ export default class UI {
     const weekFilt = document.querySelector("#week-filter");
     const compFilt = document.querySelector("#comp-filter");
 
-    todayFilt.addEventListener("click", () => this.renderTasks(app, "Today"));
-    weekFilt.addEventListener("click", () =>
-      this.renderTasks(app, "This Week"),
-    );
-    compFilt.addEventListener("click", () =>
-      this.renderTasks(app, "Completed"),
-    );
+    todayFilt.addEventListener("click", () => {
+      this.renderTasks(app, "Today");
+      document.querySelector("#task-desc").innerHTML = "";
+    });
+    weekFilt.addEventListener("click", () => {
+      this.renderTasks(app, "This Week");
+      document.querySelector("#task-desc").innerHTML = "";
+    });
+    compFilt.addEventListener("click", () => {
+      this.renderTasks(app, "Completed");
+      document.querySelector("#task-desc").innerHTML = "";
+    });
   }
 
   static renderProjSec(app) {
