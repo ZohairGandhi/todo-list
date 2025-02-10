@@ -13,6 +13,7 @@ export default class App {
   removeProject(projTitle) {
     this.projectList.splice(
       this.projectList.findIndex((proj) => proj.title === projTitle),
+      1,
     );
     Storage.saveData(this);
   }
