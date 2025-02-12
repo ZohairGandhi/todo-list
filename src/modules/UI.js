@@ -58,7 +58,9 @@ export default class UI {
     tasks.forEach((task) => {
         const taskItem = this.createTaskItem(task);
 
-      taskItem.addEventListener("click", () => this.renderTaskDesc(task));
+        taskItem.addEventListener("click", () =>
+          this.renderTaskDesc(app, filterType, task),
+        );
 
       div.appendChild(taskItem);
     });
@@ -82,7 +84,7 @@ export default class UI {
     }
   }
 
-  static renderTaskDesc(task) {
+  static renderTaskDesc(app, projTitle, task, filterType = null) {
     const taskDescSec = document.querySelector("#task-desc");
 
     const datePriorSec = this.createDiv(null, "date-priority-sec");
@@ -101,6 +103,17 @@ export default class UI {
     const btnContainer = this.createDiv(null, "task-btns-container");
     const editBtn = this.createBtn("edit-task-btn", "Edit");
     const delBtn = this.createBtn("del-task-btn", "Delete");
+
+    delBtn.addEventListener("click", () => {
+      app.removeTaskFromProj(projTitle, task.title);
+      if (filterType) {
+        this.renderTasks(app, filterType);
+      } else {
+        this.renderTasks(app, projTitle);
+      }
+      taskDescSec.innerHTML = "";
+    });
+
     btnContainer.append(editBtn, delBtn);
 
     taskDescSec.innerHTML = "";
