@@ -56,7 +56,7 @@ export default class UI {
     }
 
     tasks.forEach((task) => {
-      const taskItem = this.createTaskItem(task.title, task.isCompleted);
+        const taskItem = this.createTaskItem(task);
 
       taskItem.addEventListener("click", () => this.renderTaskDesc(task));
 
@@ -117,13 +117,18 @@ export default class UI {
     return head;
   }
 
-  static createTaskItem(taskTitle, isCompleted) {
+  static createTaskItem(task, projTitle = null) {
     const div = this.createDiv("container", null);
     const chBox = document.createElement("input");
     chBox.setAttribute("type", "checkbox");
-    chBox.checked = isCompleted;
+    chBox.checked = task.isCompleted;
+
+    chBox.addEventListener("click", () => {
+      task.isCompleted = chBox.checked;
+    });
+
     const lbl = document.createElement("label");
-    lbl.textContent = taskTitle;
+    lbl.textContent = `${task.title} (${projTitle})`;
     div.append(chBox, lbl);
     return div;
   }
