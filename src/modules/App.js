@@ -43,11 +43,11 @@ export default class App {
       proj.taskList.forEach((task) => {
         if (dueDate === "Today") {
           if (task.isDueToday()) {
-            todayTasks.push(task);
+            todayTasks.push({ proj, task });
           }
         } else {
           if (task.isDueThisWeek()) {
-            todayTasks.push(task);
+            todayTasks.push({ proj, task });
           }
         }
       });
@@ -62,7 +62,7 @@ export default class App {
     this.projectList.forEach((proj) => {
       proj.taskList.forEach((task) => {
         if (task.isCompleted) {
-          compTasks.push(task);
+          compTasks.push({ proj, task });
         }
       });
     });
