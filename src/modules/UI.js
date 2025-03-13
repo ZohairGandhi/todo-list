@@ -55,6 +55,17 @@ export default class UI {
       tasks = app.getProject(filterType).taskList;
     }
 
+    if (["Completed", "Today", "This Week"].includes(filterType)) {
+      tasks.forEach(({ proj, task }) => {
+        const taskItem = this.createTaskItem(task, proj.title);
+
+        taskItem.addEventListener("click", () =>
+          this.renderTaskDesc(app, proj.title, task, filterType),
+        );
+
+        div.appendChild(taskItem);
+      });
+    } else {
     tasks.forEach((task) => {
         const taskItem = this.createTaskItem(task);
 
@@ -64,6 +75,7 @@ export default class UI {
 
       div.appendChild(taskItem);
     });
+    }
 
     taskList.innerHTML = "";
 
