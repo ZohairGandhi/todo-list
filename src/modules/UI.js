@@ -141,7 +141,7 @@ export default class UI {
     });
 
     const lbl = document.createElement("label");
-    lbl.textContent = `${task.title} (${projTitle})`;
+    lbl.textContent = projTitle ? `${task.title} (${projTitle})` : task.title;
     div.append(chBox, lbl);
     return div;
   }
