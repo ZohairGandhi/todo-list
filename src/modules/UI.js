@@ -1,5 +1,6 @@
 import listBox from "../icons/list-box-outline.svg";
 import flag from "../icons/flag.svg";
+import { format } from "date-fns";
 
 export default class UI {
   static setUpFilterSec(app) {
@@ -26,6 +27,9 @@ export default class UI {
     const titleContainer = this.createDiv(null, "proj-sec-title-container");
     const title = this.createPara("Projects", "proj-sec-title");
     const btn = this.createBtn("add-proj-btn", "+");
+    const addProjDialog = document.querySelector("dialog");
+
+    btn.addEventListener("click", () => addProjDialog.showModal());
 
     projSec.innerHTML = "";
     titleContainer.append(title, btn);
@@ -38,6 +42,106 @@ export default class UI {
         document.querySelector("#task-desc").innerHTML = "";
       });
       projSec.appendChild(projItem);
+    });
+  }
+
+  static setUpProjDialog(app) {
+    const dialog = document.querySelector("#proj-dialog");
+    const cancelBtn = document.querySelector(
+      "#proj-dialog .btn-container button:first-child",
+    );
+    const addBtn = document.querySelector(
+      "#proj-dialog .btn-container button:nth-child(2)",
+    );
+
+    cancelBtn.addEventListener("click", () => {
+      const textField = document.querySelector(
+        "#proj-dialog .dialog-container input",
+      );
+      textField.value = "";
+      dialog.close();
+    });
+
+    addBtn.addEventListener("click", () => {
+      const textField = document.querySelector(
+        "#proj-dialog .dialog-container input",
+      );
+
+      if (textField.value === "") {
+        alert("Please enter a project title!");
+        return;
+      }
+
+      if (app.getProject(textField.value) !== undefined) {
+        alert("Project already exists!");
+        textField.value = "";
+        return;
+      }
+
+      app.addProject(textField.value);
+      this.renderProjSec(app);
+      textField.value = "";
+      dialog.close();
+    });
+  }
+
+  static setUpTaskDialog(app) {
+    const dialog = document.querySelector("#task-dialog");
+    const dateInput = document.querySelector(".date-priority-pair input");
+    const cancelBtn = document.querySelector(
+      "#task-dialog .btn-container button:first-child",
+    );
+    const addBtn = document.querySelector(
+      "#task-dialog .btn-container button:nth-child(2)",
+    );
+
+    dateInput.setAttribute("min", format(new Date(), "yyyy-MM-dd"));
+    dateInput.setAttribute("value", format(new Date(), "yyyy-MM-dd"));
+
+    cancelBtn.addEventListener("click", () => {
+      document.querySelector("form.dialog-container").reset();
+      dialog.close();
+    });
+
+    addBtn.addEventListener("click", () => {
+      const projTitle = document.querySelector("#task-list h1");
+      const titleInput = document.querySelector(
+        "#task-dialog .dialog-container input",
+      );
+      const descInput = document.querySelector(
+        "#task-dialog .dialog-container textarea",
+      );
+      const dateInput = document.querySelector(
+        "#task-dialog .date-priority-pair input",
+      );
+      const priorityInput = document.querySelector(
+        "#task-dialog .date-priority-pair select",
+      );
+
+      if (titleInput.value === "" || dateInput.value === "") {
+        alert("Please enter a task title & due date!");
+        return;
+      }
+
+      if (
+        app.getTaskFromProj(projTitle.textContent, titleInput.value) !==
+        undefined
+      ) {
+        alert("Task already exists!");
+        document.querySelector("form.dialog-container").reset();
+        return;
+      }
+
+      app.addTaskToProj(
+        projTitle.textContent,
+        titleInput.value,
+        descInput.value,
+        new Date(dateInput.value),
+        priorityInput.value,
+      );
+      this.renderTasks(app, projTitle.textContent);
+      document.querySelector("form.dialog-container").reset();
+      dialog.close();
     });
   }
 
@@ -66,15 +170,15 @@ export default class UI {
         div.appendChild(taskItem);
       });
     } else {
-    tasks.forEach((task) => {
+      tasks.forEach((task) => {
         const taskItem = this.createTaskItem(task);
 
         taskItem.addEventListener("click", () =>
           this.renderTaskDesc(app, filterType, task),
         );
 
-      div.appendChild(taskItem);
-    });
+        div.appendChild(taskItem);
+      });
     }
 
     taskList.innerHTML = "";
@@ -84,6 +188,9 @@ export default class UI {
     } else {
       const addBtn = this.createBtn("add-task-btn", "+ Add Task");
       const delBtn = this.createBtn("del-proj-btn", "Delete Project");
+      const taskDialog = document.querySelector("#task-dialog");
+
+      addBtn.addEventListener("click", () => taskDialog.showModal());
 
       delBtn.addEventListener("click", () => {
         app.removeProject(filterType);
