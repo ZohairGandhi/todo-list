@@ -1,4 +1,5 @@
 import Project from "./Project";
+import Task from "./Task.js";
 import Storage from "./Storage";
 
 export default class App {
@@ -23,8 +24,10 @@ export default class App {
     return this.projectList.find((proj) => proj.title === projTitle);
   }
 
-  addTaskToProj(projTitle, task) {
-    this.getProject(projTitle).addTask(task);
+  addTaskToProj(projTitle, title, desc, dueDate, priority) {
+    this.getProject(projTitle).addTask(
+      new Task(title, desc, dueDate, priority),
+    );
     Storage.saveData(this);
   }
 
