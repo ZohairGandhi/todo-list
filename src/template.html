@@ -34,12 +34,12 @@
         <hr class="sep" />
 
         <div class="flex-list" id="proj-sec">
-          <div id="proj-sec-title-container">
+          <!-- <div id="proj-sec-title-container">
             <p id="proj-sec-title">Projects</p>
             <button id="add-proj-btn">+</button>
-          </div>
+          </div> -->
 
-          <div class="list-item">
+          <!-- <div class="list-item">
             <img src="./icons/list-box-outline.svg" alt="" />
             <p>Home</p>
           </div>
@@ -57,12 +57,12 @@
           <div class="list-item">
             <img src="./icons/list-box-outline.svg" alt="" />
             <p>Miscellaneous</p>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <div id="task-list">
-        <h1 class="head">Project Name</h1>
+        <!-- <h1 class="head">Project Name</h1>
 
         <button id="add-task-btn">+ Add task</button>
 
@@ -88,11 +88,11 @@
           </div>
         </div>
 
-        <button id="del-proj-btn">Delete Project</button>
+        <button id="del-proj-btn">Delete Project</button> -->
       </div>
 
       <div id="task-desc">
-        <div id="date-priority-sec">
+        <!-- <div id="date-priority-sec">
           <p>Sat, 11 Jan</p>
           <img src="./icons/flag.svg" alt="" />
         </div>
@@ -109,8 +109,57 @@
         <div id="task-btns-container">
           <button id="edit-task-btn">Edit</button>
           <button id="del-task-btn">Delete</button>
-        </div>
+        </div> -->
       </div>
+
+      <dialog id="proj-dialog">
+        <div class="dialog-container">
+          <h2>Add Project</h2>
+
+          <input type="text" size="25ch" placeholder="Project Title" />
+
+          <div class="btn-container">
+            <button type="submit">Cancel</button>
+            <button type="submit">Add</button>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog id="task-dialog">
+        <form method="dialog" class="dialog-container">
+          <h2>Add Task</h2>
+
+          <input type="text" size="50ch" placeholder="Task Title" />
+          <textarea
+            name=""
+            id="task-desc-field"
+            rows="10"
+            cols="50"
+            placeholder="Task Description..."
+          ></textarea>
+
+          <div class="date-priority-pair">
+            <label for="">
+              Due Date
+              <input type="date" />
+            </label>
+
+            <label for="">
+              Priority
+              <select>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="btn-container">
+            <button type="button">Cancel</button>
+            <button type="button">Add</button>
+          </div>
+        </form>
+      </dialog>
     </div>
   </body>
 </html>

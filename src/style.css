@@ -166,3 +166,54 @@ button:hover {
 #task-btns-container button:hover {
   background-color: var(--task-list-bg);
 }
+
+dialog {
+  padding: 2rem;
+  border-radius: 16px;
+  margin: auto;
+}
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dialog-container input,
+.dialog-container textarea {
+  appearance: none;
+  font-size: 1.1rem;
+  border-radius: 16px;
+  padding: 0.2rem 0.5rem;
+  font-family: "Ubuntu Mono", serif;
+}
+
+.dialog-container select {
+  font-size: 1.1rem;
+  border-radius: 16px;
+  padding: 0.2rem 0.5rem;
+  font-family: "Ubuntu Mono", serif;
+}
+
+.dialog-container textarea {
+  resize: none;
+}
+
+.dialog-container textarea {
+  border-radius: 0;
+}
+
+.dialog-container #task-input {
+}
+
+.btn-container,
+.date-priority-pair {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn-container button {
+  width: 35%;
+}
