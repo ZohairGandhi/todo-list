@@ -123,6 +123,10 @@ export default class UI {
         return;
       }
 
+      if (dialog.dataset.editMode === "true") {
+        app.removeTaskFromProj(projTitle.textContent, titleInput.value);
+      }
+
       if (
         app.getTaskFromProj(projTitle.textContent, titleInput.value) !==
         undefined
@@ -139,8 +143,16 @@ export default class UI {
         new Date(dateInput.value),
         priorityInput.value,
       );
+
       this.renderTasks(app, projTitle.textContent);
+      this.renderTaskDesc(
+        app,
+        projTitle.textContent,
+        app.getTaskFromProj(projTitle.textContent, titleInput.value),
+      );
       document.querySelector("form.dialog-container").reset();
+
+      dialog.dataset.editMode = false;
       dialog.close();
     });
   }
@@ -222,6 +234,30 @@ export default class UI {
     const btnContainer = this.createDiv(null, "task-btns-container");
     const editBtn = this.createBtn("edit-task-btn", "Edit");
     const delBtn = this.createBtn("del-task-btn", "Delete");
+
+    editBtn.addEventListener("click", () => {
+      const dialog = document.querySelector("#task-dialog");
+      const titleInput = document.querySelector(
+        "#task-dialog .dialog-container input",
+      );
+      const descInput = document.querySelector(
+        "#task-dialog .dialog-container textarea",
+      );
+      const dateInput = document.querySelector(
+        "#task-dialog .date-priority-pair input",
+      );
+      const priorityInput = document.querySelector(
+        "#task-dialog .date-priority-pair select",
+      );
+
+      titleInput.value = task.title;
+      descInput.value = task.desc;
+      dateInput.value = format(task.dueDate, "yyyy-MM-dd");
+      priorityInput.value = task.priority;
+
+      dialog.dataset.editMode = true;
+      dialog.showModal();
+    });
 
     delBtn.addEventListener("click", () => {
       app.removeTaskFromProj(projTitle, task.title);
