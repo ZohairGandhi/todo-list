@@ -123,10 +123,6 @@ export default class UI {
         return;
       }
 
-      if (dialog.dataset.editMode === "true") {
-        app.removeTaskFromProj(projTitle.textContent, titleInput.value);
-      }
-
       if (
         app.getTaskFromProj(projTitle.textContent, titleInput.value) !==
         undefined
@@ -152,7 +148,75 @@ export default class UI {
       );
       document.querySelector("form.dialog-container").reset();
 
-      dialog.dataset.editMode = false;
+      dialog.close();
+    });
+  }
+
+  static setUpEditTaskDialog(app) {
+    const dialog = document.querySelector("#edit-task-dialog");
+    const dateInput = document.querySelector(".date-priority-pair input");
+    const cancelBtn = document.querySelector(
+      "#edit-task-dialog .btn-container button:first-child",
+    );
+    const addBtn = document.querySelector(
+      "#edit-task-dialog .btn-container button:nth-child(2)",
+    );
+
+    dateInput.setAttribute("min", format(new Date(), "yyyy-MM-dd"));
+    dateInput.setAttribute("value", format(new Date(), "yyyy-MM-dd"));
+
+    cancelBtn.addEventListener("click", () => {
+      document.querySelector("form.dialog-container").reset();
+      dialog.close();
+    });
+
+    addBtn.addEventListener("click", () => {
+      const projTitle = document.querySelector("#task-list h1");
+      const titleInput = document.querySelector(
+        "#edit-task-dialog .dialog-container input",
+      );
+      const descInput = document.querySelector(
+        "#edit-task-dialog .dialog-container textarea",
+      );
+      const dateInput = document.querySelector(
+        "#edit-task-dialog .date-priority-pair input",
+      );
+      const priorityInput = document.querySelector(
+        "#edit-task-dialog .date-priority-pair select",
+      );
+
+      if (titleInput.value === "" || dateInput.value === "") {
+        alert("Please enter a task title & due date!");
+        return;
+      }
+
+      const match = app.getTaskFromProj(
+        projTitle.textContent,
+        titleInput.value,
+      );
+      const origTitle = document.querySelector("#task-desc-head").textContent;
+
+      if (match !== undefined && match.title !== origTitle) {
+        alert("Task already exists!");
+        document.querySelector("form.dialog-container").reset();
+        return;
+      }
+
+      const origTask = app.getTaskFromProj(projTitle.textContent, origTitle);
+
+      origTask.title = titleInput.value;
+      origTask.desc = descInput.value;
+      origTask.dueDate = new Date(dateInput.value);
+      origTask.priority = priorityInput.value;
+
+      this.renderTasks(app, projTitle.textContent);
+      this.renderTaskDesc(
+        app,
+        projTitle.textContent,
+        app.getTaskFromProj(projTitle.textContent, titleInput.value),
+      );
+      document.querySelector("form.dialog-container").reset();
+
       dialog.close();
     });
   }
@@ -236,18 +300,18 @@ export default class UI {
     const delBtn = this.createBtn("del-task-btn", "Delete");
 
     editBtn.addEventListener("click", () => {
-      const dialog = document.querySelector("#task-dialog");
+      const dialog = document.querySelector("#edit-task-dialog");
       const titleInput = document.querySelector(
-        "#task-dialog .dialog-container input",
+        "#edit-task-dialog .dialog-container input",
       );
       const descInput = document.querySelector(
-        "#task-dialog .dialog-container textarea",
+        "#edit-task-dialog .dialog-container textarea",
       );
       const dateInput = document.querySelector(
-        "#task-dialog .date-priority-pair input",
+        "#edit-task-dialog .date-priority-pair input",
       );
       const priorityInput = document.querySelector(
-        "#task-dialog .date-priority-pair select",
+        "#edit-task-dialog .date-priority-pair select",
       );
 
       titleInput.value = task.title;
@@ -255,7 +319,6 @@ export default class UI {
       dateInput.value = format(task.dueDate, "yyyy-MM-dd");
       priorityInput.value = task.priority;
 
-      dialog.dataset.editMode = true;
       dialog.showModal();
     });
 

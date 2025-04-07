@@ -160,6 +160,42 @@
           </div>
         </form>
       </dialog>
+
+      <dialog id="edit-task-dialog">
+        <form method="dialog" class="dialog-container">
+          <h2>Edit Task</h2>
+
+          <input type="text" size="50ch" placeholder="Task Title" />
+          <textarea
+            name=""
+            id="task-desc-field"
+            rows="10"
+            cols="50"
+            placeholder="Task Description..."
+          ></textarea>
+
+          <div class="date-priority-pair">
+            <label for="">
+              Due Date
+              <input type="date" />
+            </label>
+
+            <label for="">
+              Priority
+              <select>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="btn-container">
+            <button type="button">Cancel</button>
+            <button type="button">Save</button>
+          </div>
+        </form>
+      </dialog>
     </div>
   </body>
 </html>
