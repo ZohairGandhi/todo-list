@@ -293,6 +293,7 @@ export default class UI {
       task.title,
       "task-desc-head",
     );
+    taskTitle.dataset.projTitle = projTitle;
     const taskDesc = this.createPara(task.desc, "task-desc-txt");
 
     const btnContainer = this.createDiv(null, "task-btns-container");
