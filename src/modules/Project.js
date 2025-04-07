@@ -11,6 +11,7 @@ export default class Project {
   removeTask(taskTitle) {
     this.taskList.splice(
       this.taskList.findIndex((task) => task.title === taskTitle),
+      1,
     );
   }
 
