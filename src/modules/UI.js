@@ -171,7 +171,8 @@ export default class UI {
     });
 
     addBtn.addEventListener("click", () => {
-      const projTitle = document.querySelector("#task-list h1");
+      const projTitle =
+        document.querySelector("#task-desc-head").dataset.projTitle;
       const titleInput = document.querySelector(
         "#edit-task-dialog .dialog-container input",
       );
@@ -190,10 +191,7 @@ export default class UI {
         return;
       }
 
-      const match = app.getTaskFromProj(
-        projTitle.textContent,
-        titleInput.value,
-      );
+      const match = app.getTaskFromProj(projTitle, titleInput.value);
       const origTitle = document.querySelector("#task-desc-head").textContent;
 
       if (match !== undefined && match.title !== origTitle) {
@@ -202,18 +200,18 @@ export default class UI {
         return;
       }
 
-      const origTask = app.getTaskFromProj(projTitle.textContent, origTitle);
+      const origTask = app.getTaskFromProj(projTitle, origTitle);
 
       origTask.title = titleInput.value;
       origTask.desc = descInput.value;
       origTask.dueDate = new Date(dateInput.value);
       origTask.priority = priorityInput.value;
 
-      this.renderTasks(app, projTitle.textContent);
+      this.renderTasks(app, projTitle);
       this.renderTaskDesc(
         app,
-        projTitle.textContent,
-        app.getTaskFromProj(projTitle.textContent, titleInput.value),
+        projTitle,
+        app.getTaskFromProj(projTitle, titleInput.value),
       );
       document.querySelector("form.dialog-container").reset();
 
