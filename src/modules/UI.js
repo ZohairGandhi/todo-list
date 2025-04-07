@@ -171,6 +171,7 @@ export default class UI {
     });
 
     addBtn.addEventListener("click", () => {
+      const filterType = document.querySelector("#task-list h1").textContent;
       const projTitle =
         document.querySelector("#task-desc-head").dataset.projTitle;
       const titleInput = document.querySelector(
@@ -207,11 +208,14 @@ export default class UI {
       origTask.dueDate = new Date(dateInput.value);
       origTask.priority = priorityInput.value;
 
-      this.renderTasks(app, projTitle);
+      this.renderTasks(app, filterType);
       this.renderTaskDesc(
         app,
         projTitle,
         app.getTaskFromProj(projTitle, titleInput.value),
+        ["Completed", "Today", "This Week"].includes(filterType)
+          ? filterType
+          : null,
       );
       document.querySelector("form.dialog-container").reset();
 
