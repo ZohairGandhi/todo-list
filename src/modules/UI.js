@@ -1,5 +1,7 @@
 import listBox from "../icons/list-box-outline.svg";
-import flag from "../icons/flag.svg";
+import highFlag from "../icons/high-flag.svg";
+import medFlag from "../icons/med-flag.svg";
+import lowFlag from "../icons/low-flag.svg";
 import { format } from "date-fns";
 
 export default class UI {
@@ -286,7 +288,12 @@ export default class UI {
 
     const datePriorSec = this.createDiv(null, "date-priority-sec");
     const date = this.createPara(task.getFormattedDate());
-    const img = this.createImg(flag);
+    const img =
+      task.priority === "high"
+        ? this.createImg(highFlag)
+        : task.priority === "medium"
+          ? this.createImg(medFlag)
+          : this.createImg(lowFlag);
     datePriorSec.append(date, img);
 
     const taskTitle = this.createHeading(
