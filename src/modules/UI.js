@@ -5,6 +5,14 @@ import lowFlag from "../icons/low-flag.svg";
 import { format } from "date-fns";
 
 export default class UI {
+  static setUpAllComponents(app) {
+    this.renderProjSec(app);
+    this.setUpFilterSec(app);
+    this.setUpProjDialog(app);
+    this.setUpTaskDialog(app);
+    this.setUpEditTaskDialog(app);
+  }
+
   static setUpFilterSec(app) {
     const todayFilt = document.querySelector("#today-filter");
     const weekFilt = document.querySelector("#week-filter");
