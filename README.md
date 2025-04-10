@@ -40,7 +40,7 @@ git clone https://github.com/ZohairGandhi/todo-list.git
 cd todo-list
 ```
 
-2. Install the required dependencies:
+3. Install the required dependencies:
 
 ```bash
 npm install
