@@ -10,6 +10,11 @@
       href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
   </head>
   <body>
     <div id="app-layout">
@@ -125,5 +130,19 @@
         </form>
       </dialog>
     </div>
+
+    <footer>
+      <p>
+        Copyright (c) <span id="current-year"></span> Zohair Gandhi.
+        <a href="https://github.com/ZohairGandhi" target="_blank"
+          ><i class="devicon-github-original"></i
+        ></a>
+      </p>
+    </footer>
+
+    <script>
+      document.querySelector("#current-year").textContent =
+        new Date().getFullYear();
+    </script>
   </body>
 </html>

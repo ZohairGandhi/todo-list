@@ -8,6 +8,8 @@ body {
   height: 100%;
   font-family: "Ubuntu Mono", serif;
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
@@ -216,4 +218,20 @@ dialog {
 
 .btn-container button {
   width: 35%;
+}
+
+footer {
+  background-color: var(--proj-list-bg);
+  color: var(--muted-text-color);
+  text-align: center;
+  padding: 0.8rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--muted-text-color);
+}
+
+footer a:hover {
+  color: var(--chbox-bg);
 }
